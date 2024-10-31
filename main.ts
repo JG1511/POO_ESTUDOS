@@ -1,4 +1,4 @@
-import { Personagem } from "./Personagem"; // Importando a classe Personagem
+ import { Personagem } from "./Personagem"; // Importando a classe Personagem
 import prompt from "prompt-sync"
 
 let teclado = prompt();
@@ -6,7 +6,7 @@ let person : Personagem = new Personagem("João",40,30,50,20)  // Criação de u
 let opcao = 0;
 
 while(opcao != 9 || person.isDead()){//O loop só vai parar quando o usario selecionar a opção nove ou o personagem morrer.
-    console.log("+=============Personagem============+")
+    console.log(`+=============Personagem ${person.nome}============+`)
     console.log("|1. Treinar ataque                  |")
     console.log("|2. Treinar defesa                  |")
     console.log("|3. Descansar                       |")

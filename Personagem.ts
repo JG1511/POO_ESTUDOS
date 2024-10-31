@@ -4,20 +4,25 @@
 // Posso ter vários parâmetros, mas só um retorno 
 
 export class Personagem{ // instaciando uma class e seus atributos
-    nome : string = ""
-    energia: number = 0;
-    vida: number = 0;
-    ataque : number = 0;
-    defesa: number = 0;
+constructor(// encapsulamento 
+    private _nome : string,
+    private energia : number,
+    private vida : number,
+    private ataque : number,
+    private defesa : number
+){}
 
-    constructor(nome : string, energia : number, vida: number, ataque : number, defesa : number ){//Criação de uma contrutor
-        this.nome = nome;
-        this.energia = energia;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defesa = defesa;
+    
+    public get nome() : string {//método acessor
+        return this._nome;
     }
-    status():string{ 
+    
+    public set nome(nome : string) {// método modificador 
+        this._nome = nome;
+    }
+    
+    
+    public status():string{ 
         return( 
         "Guerreiro: \n" +
         "\nNome: "+
@@ -29,35 +34,36 @@ export class Personagem{ // instaciando uma class e seus atributos
         )
        
     }
-    treinarAtaque(): void{//Utilização de um método sem retorno
-        this.ataque += Math.random() * 7
-        this.energia -= Math.random() * 10
-        this.isDead();  
+    public treinarAtaque(): void{//Utilização de um método sem retorno
+        this.ataque += this.randomizar(7);
+        this.energia -= this.randomizar(10);
         if(this.ataque > 100){
             this.ataque = 0;
         }
     }
-    treinarDefesa():void{
-        this.defesa += Math.random() * 5
-        this.defesa -= Math.random() * 10
-        this.isDead();
+    public treinarDefesa():void{
+        this.defesa += this.randomizar(5);
+        this.defesa -= this.randomizar(10);
         if(this.defesa > 100){
             this.defesa = 0;
         }
     }
-    descansar(hour: number):void{ // Método sem retorno com parâmetro
-        this.energia += hour * Math.random() * 10;
+    public descansar(hour: number):void{ // Método sem retorno com parâmetro
+        this.energia += hour * this.randomizar(10);
            if (this.energia > 100){
             this.energia = 100;
            }
     }
-    batalhar():number{ // Método com retorno de um número
-        let desgaste: number = Math.random() * 100
+    public batalhar():number{ // Método com retorno de um número
+        let desgaste: number = this.randomizar(10);
         this.energia -= desgaste;
         this.isDead();
         return desgaste;
     }
-    isDead():boolean{ // Método com retorno de verdadeiro ou falso 
+    public isDead():boolean{ // Método com retorno de verdadeiro ou falso 
      return this.energia < 0;
+  }
+     private randomizar(fator: number): number{
+    return Math.random() * fator;
   }
 }
